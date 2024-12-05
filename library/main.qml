@@ -268,6 +268,8 @@ Window {
     }
 
 
+
+
     property var mainPageIndex: 0
     //mainpage
     Rectangle{
@@ -278,13 +280,11 @@ Window {
             anchors.fill:parent
             source:"file:./images/mainpage.png"
         }
-
         Image{
             x:40
             y:80
             source:"file:./images/logo_small.png"
         }
-
         Rectangle{
             id:logoRect
             width:73
@@ -295,7 +295,6 @@ Window {
             x:20
             anchors.verticalCenter: parent.verticalCenter
         }
-
         Rectangle{
             id:textRect
             width:223
@@ -307,7 +306,6 @@ Window {
             anchors.leftMargin: 20
             anchors.verticalCenter: parent.verticalCenter
         }
-
         Column{
             anchors.centerIn: logoRect
             spacing: 45
@@ -453,6 +451,55 @@ Window {
             }
         }
 
+        Image{
+            x:434
+            y:63
+            source:"file:./images/datetime.png"
+            Text {
+                x:5
+                y:10
+                text:datetime.m
+                color:"#F5F8FA"
+                font.pixelSize: 22
+                font.bold: true
+            }
+            Rectangle{
+                y:40
+                width:95
+                height:50
+                color:"transparent"
+                Text {
+                    anchors.centerIn: parent
+                    text: datetime.d
+                    color:"#66757F"
+                    font.pixelSize: 42
+                    font.bold: true
+                }
+            }
+            Rectangle{
+                x:60
+                y:38
+                width:284
+                height:124
+                color:"transparent"
+                Text {
+                    y:30
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: datetime.date
+                    color:"#FFFFFF"
+                    font.pixelSize: 25
+                    font.bold: true
+                }
+                Text {
+                    y:70
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: datetime.time
+                    color:"#FFFFFF"
+                    font.pixelSize: 25
+                    font.bold: true
+                }
+            }
+        }
 
         Image{
             x:1800

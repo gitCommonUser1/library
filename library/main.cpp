@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "client.h"
+#include "datetime.h"
 
 Client *client = nullptr;
 
@@ -15,6 +16,9 @@ int main(int argc, char *argv[])
 
     client = new Client;
     engine.rootContext()->setContextProperty("client",client);
+
+    DateTime *datetime = new DateTime;
+    engine.rootContext()->setContextProperty("datetime",datetime);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

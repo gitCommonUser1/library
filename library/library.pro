@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         client.cpp \
+        datetime.cpp \
         main.cpp \
         messageio.cpp
 
@@ -36,5 +37,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     client.h \
     crc16.h \
+    datetime.h \
     messagecmd.h \
     messageio.h
