@@ -330,6 +330,7 @@ Window {
                     visible: mainPageIndex == 0
                 }
                 Text{
+                    id:borrow
                     x:85
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 28
@@ -358,6 +359,7 @@ Window {
                     visible: mainPageIndex == 1
                 }
                 Text{
+                    id:books
                     x:150
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 28
@@ -386,6 +388,7 @@ Window {
                     visible: mainPageIndex == 2
                 }
                 Text{
+                    id:history
                     x:140
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 28
@@ -414,6 +417,7 @@ Window {
                     visible: mainPageIndex == 3
                 }
                 Text{
+                    id:searchs
                     x:140
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 28
@@ -442,6 +446,7 @@ Window {
                     visible: mainPageIndex == 4
                 }
                 Text{
+                    id:stats
                     x:150
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 28
@@ -514,6 +519,62 @@ Window {
                 onClicked: {
                     pageIndex = 0
                 }
+            }
+        }
+
+        Text {
+            anchors.horizontalCenter: stackView.horizontalCenter
+            anchors.bottom: stackView.top
+            anchors.bottomMargin: 40
+            color:"white"
+            font.pixelSize: 28
+            font.bold: true
+            text:{
+                if(mainPageIndex == 0){
+                    borrow.text
+                }else if(mainPageIndex == 1){
+                    books.text
+                }else if(mainPageIndex == 2){
+                    history.text
+                }else if(mainPageIndex == 3){
+                    searchs.text
+                }else if(mainPageIndex == 4){
+                    stats.text
+                }
+            }
+        }
+
+        Rectangle{
+            id:stackView
+            x:500
+            y:300
+            width:1300
+            height:700
+            color:"transparent"
+
+            //borrow
+            Rectangle{
+                visible: mainPageIndex == 0
+            }
+
+            //books
+            Rectangle{
+                visible: mainPageIndex == 1
+            }
+
+            //history
+            Rectangle{
+                visible: mainPageIndex == 2
+            }
+
+            //searchs
+            Rectangle{
+                visible: mainPageIndex == 3
+            }
+
+            //stats
+            Rectangle{
+                visible: mainPageIndex == 4
             }
         }
 
