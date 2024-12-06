@@ -2,6 +2,7 @@
 #define CLIENT_H
 
 #include <QObject>
+#include "booksmodel.h"
 
 class MessageIO;
 
@@ -24,12 +25,15 @@ public:
     }
 
     Q_INVOKABLE bool signIn(QString username,QString password);
+    Q_INVOKABLE void getBooks();
+    Q_INVOKABLE void removeBook(QString bookId);
     Q_INVOKABLE void sendImage(QString fileName);
 private:
     void signInCall(bool &ok, bool &value,const QVariantList &pars);
 
 signals:
     void signInSignal(bool result);
+    void newBookMessage(const MenuItem&item);
 
 public slots:
     void setConnected(bool connected)

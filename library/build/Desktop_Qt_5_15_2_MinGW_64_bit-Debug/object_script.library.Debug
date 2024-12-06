@@ -1,0 +1,10 @@
+debug/booksmodel.o
+debug/client.o
+debug/datetime.o
+debug/main.o
+debug/messageio.o
+debug/qrc_qml.o
+debug/moc_booksmodel.o
+debug/moc_client.o
+debug/moc_datetime.o
+debug/moc_messageio.o

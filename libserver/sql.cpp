@@ -49,3 +49,36 @@ bool Sql::signIn(const QString &userName, const QString &password)
     }
 }
 
+QVariantList Sql::getAllBooks()
+{
+    QVariantList bookList;
+    QSqlQuery query("SELECT * FROM books", db);
+    while (query.next()) {
+        QStringList book;
+        book << query.value("id").toString();
+        book << query.value("name").toString();
+        book << query.value("author").toString();
+        book << query.value("book_id").toString();
+        book << query.value("pages").toString();
+        book << query.value("type").toString();
+        book << query.value("language").toString();
+        book << query.value("price").toString();
+        book << query.value("status").toString();
+        bookList.append(book);
+    }
+    return bookList;
+}
+
+bool Sql::removeBook(QString bookId)
+{
+    QSqlQuery query(db);
+    query.prepare("DELETE FROM books WHERE book_id = :book_id");
+    query.bindValue(":book_id", bookId);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to delete book:" << query.lastError();
+        return false;
+    }
+    return true;
+}
+

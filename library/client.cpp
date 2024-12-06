@@ -50,6 +50,16 @@ bool Client::signIn(QString username,QString password)
     }
 }
 
+void Client::getBooks()
+{
+    write("getBooks","get",{});
+}
+
+void Client::removeBook(QString bookId)
+{
+    write("removeBook","set",{bookId});
+}
+
 void Client::sendImage(QString fileName)
 {
     static QTimer *timer = nullptr;

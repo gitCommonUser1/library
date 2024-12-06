@@ -555,6 +555,153 @@ Window {
             //borrow
             Rectangle{
                 visible: mainPageIndex == 0
+                anchors.fill:parent
+                color:"transparent"
+
+                Text {
+                    id:category
+                    x:20
+                    text: qsTr("Category")
+                    color:"white"
+                    font.pixelSize: 20
+                    font.bold: true
+                }
+
+                LibCombobox{
+                    anchors.left:category.right
+                    anchors.leftMargin: 20
+                    anchors.verticalCenter: category.verticalCenter
+                    comboBoxModel:["null"]
+                }
+
+                Text {
+                    id:type
+                    x:470
+                    text: qsTr("Type")
+                    color:"white"
+                    font.pixelSize: 20
+                    font.bold: true
+                }
+
+                LibCombobox{
+                    anchors.left:type.right
+                    anchors.leftMargin: 20
+                    anchors.verticalCenter: category.verticalCenter
+                    comboBoxModel:["null"]
+                }
+
+                Text {
+                    id:language
+                    x:920
+                    text: qsTr("Language")
+                    color:"white"
+                    font.pixelSize: 20
+                    font.bold: true
+                }
+
+                LibCombobox{
+                    anchors.left:language.right
+                    anchors.leftMargin: 20
+                    anchors.verticalCenter: category.verticalCenter
+                    comboBoxModel:["null"]
+                }
+
+                Image{
+                    width:34
+                    height:38
+                    anchors.right:gridView.right
+                    anchors.rightMargin: 30
+                    anchors.verticalCenter: category.verticalCenter
+                    source:"file:./images/mi_filter.png"
+                }
+
+
+                GridView {
+                    id: gridView
+                    anchors.top:category.bottom
+                    anchors.topMargin: 40
+                    width:1260
+                    height:640
+                    cellWidth: 630   // 每个单元格的宽度
+                    cellHeight: 320  // 每个单元格的高度
+                    model: booksModel         // 总共有四个项目
+                    clip:true
+                    delegate: Item {
+                        width: 600
+                        height: 290
+                        Rectangle{
+                            anchors.fill:parent
+                            radius: 40
+                            color: "#FFFAFA"
+                            Image{
+                                id:bookImage
+                                x:20
+                                anchors.verticalCenter: parent.verticalCenter
+                                source:"file:./images/test_image.png"
+                            }
+                            Rectangle{
+                                width:98
+                                height:28
+                                radius: 35
+                                x:450
+                                y:276
+                                color:enter?"#FF0303":"#E43F3F"
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: qsTr("DELETE")
+                                    color:"white"
+                                    font.pixelSize: 20
+                                }
+                                property var enter: false
+                                MouseArea{
+                                    anchors.fill:parent
+                                    hoverEnabled: true
+                                    onEntered: {
+                                        parent.enter = true
+                                    }
+                                    onExited: {
+                                        parent.enter = false
+                                    }
+                                    onClicked: {
+                                        client.removeBook(modelBookId)
+                                    }
+                                }
+                            }
+
+                            Column{
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left:bookImage.right
+                                anchors.leftMargin: 10
+                                spacing: 20
+                                Text{
+                                    color:"black"
+                                    font.pixelSize: 19
+                                    text:"Name: " + modelName
+                                }
+                                Text{
+                                    color:"black"
+                                    font.pixelSize: 19
+                                    text:"Author: " + modelAuthor
+                                }
+                                Text{
+                                    color:"black"
+                                    font.pixelSize: 19
+                                    text:"Book ID: " + modelBookId
+                                }
+                                Text{
+                                    color:"black"
+                                    font.pixelSize: 19
+                                    text:"Pages: " + modelPages
+                                }
+                                Text{
+                                    color:"black"
+                                    font.pixelSize: 19
+                                    text:"Price: " + modelPrice
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             //books

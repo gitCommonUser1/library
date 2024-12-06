@@ -1,0 +1,10 @@
+release/booksmodel.o
+release/client.o
+release/datetime.o
+release/main.o
+release/messageio.o
+release/qrc_qml.o
+release/moc_booksmodel.o
+release/moc_client.o
+release/moc_datetime.o
+release/moc_messageio.o

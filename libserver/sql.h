@@ -14,6 +14,9 @@ public:
     bool connect(QString host,int port,QString username,QString password,QString database);
 
     bool signIn(const QString &userName, const QString &password);
+    QVariantList getAllBooks();
+    bool removeBook(QString bookId);
+
 private:
 
 signals:

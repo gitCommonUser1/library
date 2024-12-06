@@ -127,6 +127,23 @@ void MessageIO::newMessage(char *data, int len)
         }
     }else if(messageType == "imageEnd"){
         imageReceiver->fileEnd();
+    }else if(messageType == "getBooks"){
+        if(paramerType == "get"){
+            auto vList = sql->getAllBooks();
+            for(auto strList:vList){
+                QVariantList data;
+                for(auto str:strList.toStringList()){
+                    data << str;
+                }
+                sendPack(createMessage(messageType,"res",data));
+            }
+        }
+    }else if(messageType == "removeBook"){
+        if(list.size() > 0){
+            if(sql->removeBook(list[0].toString())){
+                sendPack(createMessage(messageType,"res",{list[0].toString()}));
+            }
+        }
     }
 }
 

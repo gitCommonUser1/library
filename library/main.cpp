@@ -3,8 +3,10 @@
 #include <QQmlContext>
 #include "client.h"
 #include "datetime.h"
+#include "booksmodel.h"
 
 Client *client = nullptr;
+BooksModel * booksModel = nullptr;
 
 int main(int argc, char *argv[])
 {
@@ -20,6 +22,9 @@ int main(int argc, char *argv[])
     DateTime *datetime = new DateTime;
     engine.rootContext()->setContextProperty("datetime",datetime);
 
+    booksModel = new BooksModel;
+    engine.rootContext()->setContextProperty("booksModel",booksModel);
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -27,6 +32,10 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+
+
+    //
+    client->getBooks();
 
     return app.exec();
 }

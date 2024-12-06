@@ -3,8 +3,10 @@
 #include <QTcpSocket>
 #include <QTimer>
 #include "client.h"
+#include "booksmodel.h"
 
 extern Client *client;
+extern BooksModel *booksModel;
 
 
 MessageIO::MessageIO(QObject *parent) : QObject(parent)
@@ -120,6 +122,24 @@ void MessageIO::newMessage(char *data, int len)
     if(messageType == "signIn"){
         if(paramerType == "res"){
             emit client->signInSignal(list[0].toBool());
+        }
+    }else if(messageType == "getBooks"){
+        if(paramerType == "res"){
+            MenuItem item;
+            item.setId(list[0].toInt());
+            item.setName(list[1].toString());
+            item.setAuthor(list[2].toString());
+            item.setBookId(list[3].toString());
+            item.setPages(list[4].toInt());
+            item.setType(list[5].toString());
+            item.setLanguage(list[6].toString());
+            item.setPrice(list[7].toString());
+            item.setStatus(list[8].toInt());
+            booksModel->appendItem(item);
+        }
+    }else if(messageType == "removeBook"){
+        if(paramerType == "res"){
+            booksModel->removeOneByBookId(list[0].toString());
         }
     }
 }
