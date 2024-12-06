@@ -6,7 +6,7 @@
 
 QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 
-Sql::Sql(QObject *parent) : QObject(parent)
+Sql:: Sql(QObject *parent) : QObject(parent)
 {
 
 }

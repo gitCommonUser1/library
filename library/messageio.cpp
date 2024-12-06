@@ -25,6 +25,13 @@ void MessageIO::sendPack(QByteArray bytes)
     write((char *)sendbuf,to_msg_len(bytes.length()));
 }
 
+void MessageIO::sendBytes(int type,QByteArray bytes)
+{
+    uint8_t sendbuf[to_msg_len(bytes.length())];
+    pack_bytes(Image,bytes,sendbuf);
+    write((char *)sendbuf,to_msg_len(bytes.length()));
+}
+
 void MessageIO::write(char *buf, int len)
 {
     if(m_obj->inherits("QTcpSocket"))
@@ -58,8 +65,6 @@ void MessageIO::parse()
             if(msg_len > length - offset){
                 m_lessSize = msg_len - (length - offset);
                 m_timer->start();
-                //在USB传输过程中，msg_len这两个字节如果丢了包(或者因为别的某些因素)，出现最大值可能为0xFF的长度时，
-                //会卡死在这个地方，除非Server再次发送N包来将length推到msg_len的长度
                 break;
             }else{
                 m_timer->stop();

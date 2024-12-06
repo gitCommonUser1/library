@@ -5,8 +5,14 @@
 #include <QHostAddress>
 #include <QTimer>
 #include <QEventLoop>
+#include <QFile>
+#include <QFileInfo>
 
 #define WAIT_TIME 1000
+
+// #define Max_fileSize 1024 * 200
+#define SinglePack 1024 * 50
+#define TIMER_WAIT 50
 
 Client::Client(QObject *parent) : QObject(parent)
 {
@@ -44,6 +50,51 @@ bool Client::signIn(QString username,QString password)
     }
 }
 
+void Client::sendImage(QString fileName)
+{
+    static QTimer *timer = nullptr;
+    static int offSetBytes = 0;
+    static QByteArray bytes = QByteArray();
+    if(timer != nullptr && timer->isActive())
+        return ;
+    QUrl url(fileName);
+    if(!QFile::exists(fileName))
+        return ;
+    QFile file(fileName);
+    if(!file.open(QIODevice::ReadOnly))
+        return ;
+    bytes = file.readAll();
+    if(/*bytes.size() > Max_fileSize || */bytes.size() == 0){
+        file.close();
+        return ;
+    }
+    QFileInfo fileInfo(fileName);
+    fileName = fileInfo.fileName();
+    offSetBytes = -1;
+    if(timer == nullptr){
+        timer = new QTimer;
+        timer->setInterval(TIMER_WAIT);
+        connect(timer,&QTimer::timeout,this,[=](){
+            if(offSetBytes == -1){
+                write("imageBegin","set",{fileName,bytes.size()});
+                offSetBytes = 0;
+            }else if(offSetBytes >= bytes.size()){
+                write("imageEnd","set",{});
+                timer->stop();
+            }else{
+                if(offSetBytes < bytes.size()){
+                    QByteArray data = bytes.mid(offSetBytes,SinglePack);
+                    qDebug() << "data:" << data.length();
+                    writeImage(data.data(),data.size());
+                    offSetBytes += data.size();
+                }
+            }
+        });
+    }
+    timer->start();
+    file.close();
+}
+
 void Client::signInCall(bool &ok, bool &value,const QVariantList &pars)
 {
     waitMessageCall(ok,value,"signIn",pars,&Client::signInSignal);
@@ -53,6 +104,11 @@ void Client::write(QString id, QString type, QList<QVariant> pars)
 {
     QByteArray bytes = createMessage(id,type,pars);
     messageIO->sendPack(bytes);
+}
+
+void Client::writeImage(char *data,int len)
+{
+    messageIO->sendBytes(Image,QByteArray(data,len));
 }
 
 template<typename T>

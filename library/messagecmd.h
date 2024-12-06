@@ -13,6 +13,7 @@
 
 enum CtrlType{
     Json = 0,
+    Image
 };
 
 
@@ -52,6 +53,16 @@ static inline void pack_json(QByteArray array,uint8_t *sendbuf)
     pc_ctrl->header = htons(QT_CTRL_HEAD);
     pc_ctrl->len = array.length();
     pc_ctrl->type = Json;
+    memcpy(pc_ctrl->data,array.data(),pc_ctrl->len);
+    pack_act(sendbuf);
+}
+
+static inline void pack_bytes(int type,QByteArray array,uint8_t *sendbuf)
+{
+    struct pc_ctrl_head_t *pc_ctrl = (struct pc_ctrl_head_t *)sendbuf;
+    pc_ctrl->header = htons(QT_CTRL_HEAD);
+    pc_ctrl->len = array.length();
+    pc_ctrl->type = type;
     memcpy(pc_ctrl->data,array.data(),pc_ctrl->len);
     pack_act(sendbuf);
 }

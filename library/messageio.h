@@ -18,6 +18,7 @@ public:
         return m_obj;
     }
     void sendPack(QByteArray bytes);
+    void sendBytes(int type,QByteArray bytes);
     void newMessage(char *data,int len);
 
 public slots:
