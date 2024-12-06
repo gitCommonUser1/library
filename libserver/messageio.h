@@ -19,6 +19,7 @@ public:
     }
     void sendPack(QByteArray bytes);
     void newMessage(char *data,int len);
+    void newImage(char *data,int len);
 
 public slots:
     void setObj(QObject* obj)

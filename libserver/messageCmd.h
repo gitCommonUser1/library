@@ -13,6 +13,7 @@
 
 enum CtrlType{
     Json = 0,
+    Image,
 };
 
 

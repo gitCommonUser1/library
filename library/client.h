@@ -24,6 +24,7 @@ public:
     }
 
     Q_INVOKABLE bool signIn(QString username,QString password);
+    Q_INVOKABLE void sendImage(QString fileName);
 private:
     void signInCall(bool &ok, bool &value,const QVariantList &pars);
 
@@ -50,6 +51,7 @@ private:
 
 private:
     void write(QString id, QString type,QList<QVariant>pars);
+    void writeImage(char *data,int len);
 
     template<typename T>
     void waitMessageCall(bool &ok,T &value,QString id,QVariantList pars, void (Client::*signal)(T));

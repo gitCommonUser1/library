@@ -6,6 +6,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
+        imagereceiver.cpp \
         main.cpp \
         messageio.cpp \
         server.cpp \
@@ -22,6 +23,7 @@ LIBS += -lws2_32
 
 HEADERS += \
     crc16.h \
+    imagereceiver.h \
     messagecmd.h \
     messageio.h \
     server.h \
