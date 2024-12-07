@@ -7,15 +7,13 @@
 
 class MenuItem{
     Q_GADGET
-    Q_PROPERTY(int id READ id WRITE setId)
     Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(QString author READ author WRITE setAuthor)
     Q_PROPERTY(QString bookId READ bookId WRITE setBookId)
     Q_PROPERTY(int pages READ pages WRITE setPages)
-    Q_PROPERTY(QString price READ price WRITE setPrice)
+    Q_PROPERTY(double price READ price WRITE setPrice)
     Q_PROPERTY(QString type READ type WRITE setType)
     Q_PROPERTY(QString language READ language WRITE setLanguage)
-    Q_PROPERTY(int status READ status WRITE setStatus)
 public:
     MenuItem(){
 
@@ -25,13 +23,6 @@ public:
     MenuItem &operator=(const MenuItem &) = default;
     MenuItem &operator=(MenuItem &&) = default;
 
-    int id() const{
-        return m_id;
-    }
-    void setId(const int &newId){
-        if(newId != m_id)
-            m_id = newId;
-    }
     QString author() const{
         return m_author;
     }
@@ -60,10 +51,10 @@ public:
         if(newPages != m_pages)
             m_pages = newPages;
     }
-    QString price() const{
+    double price() const{
         return m_price;
     }
-    void setPrice(const QString &newPrice){
+    void setPrice(const double &newPrice){
         if(newPrice != m_price)
             m_price = newPrice;
     }
@@ -81,24 +72,15 @@ public:
         if(newLanguage != m_language)
             m_language = newLanguage;
     }
-    int status() const{
-        return m_status;
-    }
-    void setStatus(const int &newStatus){
-        if(newStatus != m_status)
-            m_status = newStatus;
-    }
 
 private:
-    int m_id;
     QString m_author;
     QString m_name;
     QString m_bookId;
     int m_pages;
-    QString m_price;
+    double m_price;
     QString m_type;
     QString m_language;
-    int m_status;
 
 };
 Q_DECLARE_METATYPE(MenuItem)

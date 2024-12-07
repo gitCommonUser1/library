@@ -10,6 +10,7 @@ class DateTime : public QObject
     Q_PROPERTY(QString m READ m WRITE setM NOTIFY mChanged FINAL)
     Q_PROPERTY(QString time READ time WRITE setTime NOTIFY timeChanged FINAL)
     Q_PROPERTY(QString date READ date WRITE setDate NOTIFY dateChanged FINAL)
+    Q_PROPERTY(QString dateTime READ dateTime WRITE setDateTime NOTIFY dateTimeChanged FINAL)
 public:
     explicit DateTime(QObject *parent = nullptr);
 
@@ -25,6 +26,9 @@ public:
     QString date() const;
     void setDate(const QString &newDate);
 
+    QString dateTime() const;
+    void setDateTime(const QString &newDateTime);
+
 signals:
     void dChanged();
     void mChanged();
@@ -33,11 +37,14 @@ signals:
 
     void dateChanged();
 
+    void dateTimeChanged();
+
 private:
     QString m_d;
     QString m_m;
     QString m_time;
     QString m_date;
+    QString m_dateTime;
 };
 
 #endif // DATETIME_H

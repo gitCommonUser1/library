@@ -60,6 +60,11 @@ void Client::removeBook(QString bookId)
     write("removeBook","set",{bookId});
 }
 
+void Client::addBook(QString name, QString bookid, QString auname, int pages, double price, QString type, QString language)
+{
+    write("addBook","set",{name,bookid,auname,pages,price,type,language});
+}
+
 void Client::sendImage(QString fileName)
 {
     static QTimer *timer = nullptr;
@@ -103,6 +108,16 @@ void Client::sendImage(QString fileName)
     }
     timer->start();
     file.close();
+}
+
+void Client::borrowBook(QString userId, QString bookId, QString date)
+{
+    write("borrowBook","set",{userId,bookId,date});
+}
+
+void Client::returnBook(QString bookId, QString date)
+{
+    write("returnBook","set",{bookId,date});
 }
 
 void Client::signInCall(bool &ok, bool &value,const QVariantList &pars)

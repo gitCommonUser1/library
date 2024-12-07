@@ -14,6 +14,7 @@ DateTime::DateTime(QObject *parent)
         setTime(locale.toString(QDateTime::currentDateTime(),QString("h:mm AP")));
         setD(locale.toString(QDateTime::currentDateTime(),QString("d")));
         setM(m_date.left(3).toUpper());
+        setDateTime(locale.toString(QDateTime::currentDateTime(),QString("yyyy-MM-dd-HH:mm")));
     });
     timer->start(1000);
 }
@@ -68,4 +69,17 @@ void DateTime::setDate(const QString &newDate)
         return;
     m_date = newDate;
     emit dateChanged();
+}
+
+QString DateTime::dateTime() const
+{
+    return m_dateTime;
+}
+
+void DateTime::setDateTime(const QString &newDateTime)
+{
+    if (m_dateTime == newDateTime)
+        return;
+    m_dateTime = newDateTime;
+    emit dateTimeChanged();
 }

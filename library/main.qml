@@ -152,27 +152,6 @@ Window {
                 text:"admin"
             }
 
-            Image{
-                id:verifyError
-                x:1126
-                y:239
-                width:50
-                height:50
-                source:"file:./images/verify_error.png"
-                visible: false
-                NumberAnimation {
-                    id:verifyErrorAnimation
-                    target: verifyError
-                    property: "opacity"
-                    from: 1.0
-                    to: 0.0
-                    duration: 4000
-                    onFinished: {
-                        verifyError.visible = false
-                    }
-                }
-            }
-
             Text{
                 id:password
                 x:591
@@ -252,9 +231,7 @@ Window {
                             //ok
                             pageIndex = 2
                         }else{
-                            verifyError.visible = true
-                            verifyError.opacity = 1
-                            verifyErrorAnimation.restart()
+                            showTipsDialog(0,"verify error.")
                         }
                     }
                 }
@@ -269,8 +246,12 @@ Window {
 
 
 
-
     property var mainPageIndex: 0
+
+    onMainPageIndexChanged: {
+        stackViewBooks.addBookFlag = false
+    }
+
     //mainpage
     Rectangle{
         visible:pageIndex == 2
@@ -306,6 +287,7 @@ Window {
             anchors.leftMargin: 20
             anchors.verticalCenter: parent.verticalCenter
         }
+        //left menu
         Column{
             anchors.centerIn: logoRect
             spacing: 45
@@ -456,6 +438,7 @@ Window {
             }
         }
 
+        //datetime
         Image{
             x:434
             y:63
@@ -506,6 +489,7 @@ Window {
             }
         }
 
+        //head
         Image{
             x:1800
             y:80
@@ -531,7 +515,8 @@ Window {
             font.bold: true
             text:{
                 if(mainPageIndex == 0){
-                    borrow.text
+                    // borrow.text
+                    ""
                 }else if(mainPageIndex == 1){
                     books.text
                 }else if(mainPageIndex == 2){
@@ -544,6 +529,7 @@ Window {
             }
         }
 
+
         Rectangle{
             id:stackView
             x:500
@@ -552,11 +538,180 @@ Window {
             height:700
             color:"transparent"
 
+
             //borrow
             Rectangle{
+                id:stackViewBorrow
                 visible: mainPageIndex == 0
                 anchors.fill:parent
                 color:"transparent"
+
+                property var borrowFlag: true
+
+                Row{
+                    spacing: 20
+                    anchors.top:parent.top
+                    anchors.topMargin: -40-28
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    Text{
+                        text:"Borrow"
+                        color:"white"
+                        font.pixelSize: 28
+                        font.bold: true
+                    }
+                    Image{
+                        y:-1
+                        source:{
+                            if(stackViewBorrow.borrowFlag){
+                                if(enter){
+                                    "file:./images/check_left_active.png"
+                                }else{
+                                    "file:./images/check_left.png"
+                                }
+                            }else{
+                                if(enter){
+                                    "file:./images/check_right_active.png"
+                                }else{
+                                    "file:./images/check_right.png"
+                                }
+                            }
+                        }
+
+                        property var enter: false
+                        MouseArea{
+                            anchors.fill:parent
+                            hoverEnabled: true
+                            onEntered: {
+                                parent.enter = true
+                            }
+                            onExited: {
+                                parent.enter = false
+                            }
+                            onClicked: {
+                                stackViewBorrow.borrowFlag = !stackViewBorrow.borrowFlag
+                            }
+                        }
+                    }
+                    Text{
+                        text:"Return"
+                        color:"white"
+                        font.pixelSize: 28
+                        font.bold: true
+                    }
+                }
+
+                Rectangle{
+                    id:borrowBookRect
+                    width:780
+                    height:546
+                    radius: 35
+                    color:"#E5E5E5"
+                    opacity: 0.3
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.top:parent.top
+                    anchors.topMargin: 50
+                }
+                Rectangle{
+                    color:"transparent"
+                    anchors.fill:borrowBookRect
+                    Image{
+                        width:250
+                        height:80
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.bottom: parent.bottom
+                        anchors.bottomMargin: -40
+                        source:enter?"file:./images/submit_active.png":"file:./images/submit.png"
+                        property var enter: false
+                        MouseArea{
+                            anchors.fill:parent
+                            hoverEnabled: true
+                            onEntered: {
+                                parent.enter = true
+                            }
+                            onExited: {
+                                parent.enter = false
+                            }
+                            onClicked: {
+                                if(stackViewBorrow.borrowFlag){
+                                    //borrow
+                                    client.borrowBook(borrowUserIdInput.textFieldText,borrowBookIdInput.textFieldText,borrowDataInput.textFieldText,)
+                                }else{
+                                    //return
+                                    client.returnBook(borrowBookIdInput.textFieldText,returnDataInput.textFieldText,)
+                                }
+                            }
+
+                            Connections{
+                                target:client
+                                function onBorrowBookError(){
+                                    showTipsDialog(0,"The borrowing failed.")
+                                }
+                                function onReturnBookError(){
+                                    showTipsDialog(0,"Failed to return the book.")
+                                }
+                                function onBorrowBookOk(){
+                                    showTipsDialog(1,"The borrowing was successful.")
+                                }
+                                function onReturnBookOk(){
+                                    showTipsDialog(1,"The book was returned.")
+                                }
+                            }
+                        }
+                    }
+                    Row{
+                        x:60
+                        y:60
+                        spacing: 140
+                        Column{
+                            spacing: 100
+                            TextInputRow{
+                                id:borrowUserIdInput
+                                name:"User ID :     "
+                                textColor:stackViewBorrow.borrowFlag?"black":"transparent"
+                                enabled: stackViewBorrow.borrowFlag?true:false
+                            }
+                            TextInputRow{
+                                id:borrowBookIdInput
+                                name:"Book ID :     "
+                            }
+                            TextInputRow{
+                                id:borrowDataInput
+                                name:"Date :        "
+                                textFieldText:datetime.dateTime
+                                enabled: false
+                                textColor:stackViewBorrow.borrowFlag?"black":"transparent"
+                            }
+                            TextInputRow{
+                                id:returnDataInput
+                                name:"Return :      "
+                                textFieldText:datetime.dateTime
+                                enabled: false
+                                textColor:stackViewBorrow.borrowFlag?"transparent":"black"
+                            }
+                        }
+                    }
+                }
+
+            }
+
+
+            //books
+            Rectangle{
+                id:stackViewBooks
+                visible: mainPageIndex == 1 && !stackViewBooks.addBookFlag
+                anchors.fill:parent
+                color:"transparent"
+
+                property var addBookFlag: false
+                onAddBookFlagChanged: {
+                    nameInput.textFieldText = ""
+                    bookIdInput.textFieldText = ""
+                    authorInput.textFieldText = ""
+                    pagesInput.textFieldText = ""
+                    priceInput.textFieldText = ""
+                    typeInput.textFieldText = ""
+                    languageInput.textFieldText = ""
+                }
 
                 Text {
                     id:category
@@ -571,7 +726,7 @@ Window {
                     anchors.left:category.right
                     anchors.leftMargin: 20
                     anchors.verticalCenter: category.verticalCenter
-                    comboBoxModel:["null"]
+                    comboBoxModel:["Story"]
                 }
 
                 Text {
@@ -587,7 +742,7 @@ Window {
                     anchors.left:type.right
                     anchors.leftMargin: 20
                     anchors.verticalCenter: category.verticalCenter
-                    comboBoxModel:["null"]
+                    comboBoxModel:["Novel"]
                 }
 
                 Text {
@@ -603,7 +758,7 @@ Window {
                     anchors.left:language.right
                     anchors.leftMargin: 20
                     anchors.verticalCenter: category.verticalCenter
-                    comboBoxModel:["null"]
+                    comboBoxModel:["English"]
                 }
 
                 Image{
@@ -615,20 +770,33 @@ Window {
                     source:"file:./images/mi_filter.png"
                 }
 
+                Image{
+                    anchors.horizontalCenter: gridView.horizontalCenter
+                    anchors.top:gridView.bottom
+                    // anchors.topMargin: -20
+                    source:"file:./images/add_book.png"
+                    MouseArea{
+                        anchors.fill:parent
+                        onClicked: {
+                            stackViewBooks.addBookFlag = true
+                        }
+                    }
+                }
+
 
                 GridView {
                     id: gridView
                     anchors.top:category.bottom
                     anchors.topMargin: 40
                     width:1260
-                    height:640
+                    height:580
                     cellWidth: 630   // 每个单元格的宽度
-                    cellHeight: 320  // 每个单元格的高度
+                    cellHeight: 290  // 每个单元格的高度
                     model: booksModel         // 总共有四个项目
                     clip:true
                     delegate: Item {
                         width: 600
-                        height: 290
+                        height: 260
                         Rectangle{
                             anchors.fill:parent
                             radius: 40
@@ -644,7 +812,7 @@ Window {
                                 height:28
                                 radius: 35
                                 x:450
-                                y:276
+                                y:246
                                 color:enter?"#FF0303":"#E43F3F"
                                 Text {
                                     anchors.centerIn: parent
@@ -704,10 +872,115 @@ Window {
                 }
             }
 
-            //books
+            //add book rect
             Rectangle{
-                visible: mainPageIndex == 1
+                id:addBookRect
+                anchors.fill:parent
+                radius: 35
+                color:"#E5E5E5"
+                opacity: 0.3
+                visible: stackViewBooks.addBookFlag
             }
+            //add book
+            Rectangle{
+                visible: stackViewBooks.addBookFlag
+                anchors.fill:addBookRect
+                color:"transparent"
+                Image{
+                    width:250
+                    height:80
+                    anchors.left:parent.left
+                    anchors.leftMargin: 100
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: -40
+                    source:enter?"file:./images/cancel_active.png":"file:./images/cancel.png"
+                    property var enter: false
+                    MouseArea{
+                        anchors.fill:parent
+                        hoverEnabled: true
+                        onEntered: {
+                            parent.enter = true
+                        }
+                        onExited: {
+                            parent.enter = false
+                        }
+                        onClicked: {
+                            stackViewBooks.addBookFlag = false
+                        }
+                    }
+                }
+                Image{
+                    width:250
+                    height:80
+                    anchors.right:parent.right
+                    anchors.rightMargin: 100
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: -40
+                    source:enter?"file:./images/submit_active.png":"file:./images/submit.png"
+                    property var enter: false
+                    MouseArea{
+                        anchors.fill:parent
+                        hoverEnabled: true
+                        onEntered: {
+                            parent.enter = true
+                        }
+                        onExited: {
+                            parent.enter = false
+                        }
+                        onClicked: {
+                            client.addBook(nameInput.textFieldText,
+                                           bookIdInput.textFieldText,
+                                           authorInput.textFieldText,
+                                           pagesInput.textFieldText,
+                                           priceInput.textFieldText,
+                                           typeInput.textFieldText,
+                                           languageInput.textFieldText)
+                            stackViewBooks.addBookFlag = false
+                        }
+                    }
+                }
+                Row{
+                    x:50
+                    y:50
+                    spacing: 140
+                    Column{
+                        spacing: 80
+                        TextInputRow{
+                            id:nameInput
+                            name:"Book Name :  "
+                        }
+                        TextInputRow{
+                            id:bookIdInput
+                            name:"Book ID :    "
+                        }
+                        TextInputRow{
+                            id:authorInput
+                            name:"Author Name :"
+                        }
+                        TextInputRow{
+                            id:pagesInput
+                            name:"Pages :      "
+                            val:TextInputRow.ValidatorType.INT
+                        }
+                        TextInputRow{
+                            id:priceInput
+                            name:"Price :      "
+                            val:TextInputRow.ValidatorType.DOUBLE
+                        }
+                        TextInputRow{
+                            id:typeInput
+                            name:"Type :       "
+                        }
+                    }
+                    Column{
+                        TextInputRow{
+                            id:languageInput
+                            name:"Language :   "
+                        }
+                    }
+                }
+            }
+
 
             //history
             Rectangle{
@@ -764,4 +1037,68 @@ Window {
         }
     }
 
+    Rectangle{
+        id:tipsDialog
+        z:99
+        visible: false
+        anchors.fill:parent
+        color:"transparent"
+        Rectangle{
+            anchors.centerIn: parent
+            width:400
+            height:220
+            color:"#E5E5E5"
+            radius: 35
+            Image{
+                id:tipsImage
+                width:100
+                height:100
+                // source:"file:./images/ok.png"
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.top:parent.top
+                anchors.topMargin: -50
+            }
+            Text {
+                id:tipsText
+                color:"black"
+                font.pixelSize: 24
+                width: 320
+                wrapMode: Text.WordWrap
+                anchors.horizontalCenter: parent.horizontalCenter
+                horizontalAlignment: Text.AlignHCenter
+                anchors.verticalCenter: parent.verticalCenter
+                verticalAlignment: Text.AlignVCenter
+            }
+            NumberAnimation {
+                id:tipsDialogAnimation
+                target: tipsDialog
+                property: "opacity"
+                from: 1.0
+                to: 0.0
+                duration: 3000
+                onFinished: {
+                    tipsDialog.visible = false
+                }
+            }
+        }
+        MouseArea{
+            anchors.fill:parent
+            onClicked: {
+                tipsDialogAnimation.complete()
+            }
+        }
+    }
+
+    function showTipsDialog(flag,text){
+        tipsText.text = text
+        tipsDialog.visible = true
+        tipsDialogAnimation.restart()
+        if(flag == 0){
+            //error
+            tipsImage.source = "file:./images/error.png"
+        }else if(flag == 1){
+            //ok
+            tipsImage.source = "file:./images/ok.png"
+        }
+    }
 }

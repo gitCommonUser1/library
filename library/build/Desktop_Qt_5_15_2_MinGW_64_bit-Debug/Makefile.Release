@@ -124,6 +124,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) release/qrc_qml.cpp
 release/qrc_qml.cpp: ../../qml.qrc \
 		D:/Qt/5.15.2/mingw81_64/bin/rcc.exe \
+		../../TextInputRow.qml \
 		../../LibCombobox.qml \
 		../../main.qml
 	'D:\Qt\5.15.2\mingw81_64\bin\rcc.exe' -name qml ../../qml.qrc -o release/qrc_qml.cpp
@@ -263,6 +264,21 @@ release/moc_client.cpp: ../../client.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qvarlengtharray.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qcontainerfwd.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qobject_impl.h \
+		../../booksmodel.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/QAbstractListModel \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qabstractitemmodel.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qvariant.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qmap.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qdebug.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qhash.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qtextstream.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qiodevice.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qlocale.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qshareddata.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qset.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qcontiguouscache.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qsharedpointer.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qsharedpointer_impl.h \
 		release/moc_predefs.h \
 		D:/Qt/5.15.2/mingw81_64/bin/moc.exe
 	'D:\Qt\5.15.2\mingw81_64\bin\moc.exe' $(DEFINES) --include F:/library/library/build/Desktop_Qt_5_15_2_MinGW_64_bit-Debug/release/moc_predefs.h -ID:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++ -IF:/library/library -ID:/Qt/5.15.2/mingw81_64/include -ID:/Qt/5.15.2/mingw81_64/include/QtQuick -ID:/Qt/5.15.2/mingw81_64/include/QtGui -ID:/Qt/5.15.2/mingw81_64/include/QtANGLE -ID:/Qt/5.15.2/mingw81_64/include/QtQmlModels -ID:/Qt/5.15.2/mingw81_64/include/QtQml -ID:/Qt/5.15.2/mingw81_64/include/QtNetwork -ID:/Qt/5.15.2/mingw81_64/include/QtCore -I. -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++ -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include -ID:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed -ID:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include ../../client.h -o release/moc_client.cpp
@@ -524,12 +540,9 @@ release/client.o: ../../client.cpp ../../client.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qvarlengtharray.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qcontainerfwd.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qobject_impl.h \
-		../../messageio.h \
-		D:/Qt/5.15.2/mingw81_64/include/QtCore/QMutex \
-		../../messageCmd.h \
-		../../crc16.h \
-		D:/Qt/5.15.2/mingw81_64/include/QtCore/QByteArray \
-		D:/Qt/5.15.2/mingw81_64/include/QtCore/QVariant \
+		../../booksmodel.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/QAbstractListModel \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qabstractitemmodel.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qvariant.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qmap.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qdebug.h \
@@ -542,6 +555,12 @@ release/client.o: ../../client.cpp ../../client.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qcontiguouscache.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qsharedpointer.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qsharedpointer_impl.h \
+		../../messageio.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/QMutex \
+		../../messageCmd.h \
+		../../crc16.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/QByteArray \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/QVariant \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/QJsonDocument \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qjsondocument.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qjsonvalue.h \
@@ -749,6 +768,9 @@ release/main.o: ../../main.cpp D:/Qt/5.15.2/mingw81_64/include/QtGui/QGuiApplica
 		D:/Qt/5.15.2/mingw81_64/include/QtQml/qqmlcontext.h \
 		../../client.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/QObject \
+		../../booksmodel.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/QAbstractListModel \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qabstractitemmodel.h \
 		../../datetime.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/main.o ../../main.cpp
 
@@ -845,7 +867,10 @@ release/messageio.o: ../../messageio.cpp ../../messageio.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/QTimer \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qtimer.h \
 		D:/Qt/5.15.2/mingw81_64/include/QtCore/qbasictimer.h \
-		../../client.h
+		../../client.h \
+		../../booksmodel.h \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/QAbstractListModel \
+		D:/Qt/5.15.2/mingw81_64/include/QtCore/qabstractitemmodel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/messageio.o ../../messageio.cpp
 
 release/qrc_qml.o: release/qrc_qml.cpp 

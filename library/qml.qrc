@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>LibCombobox.qml</file>
+        <file>TextInputRow.qml</file>
     </qresource>
 </RCC>

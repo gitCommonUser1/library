@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_DateTime_t {
-    QByteArrayData data[10];
-    char stringdata0[66];
+    QByteArrayData data[12];
+    char stringdata0[91];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,14 +38,17 @@ QT_MOC_LITERAL(2, 18, 0), // ""
 QT_MOC_LITERAL(3, 19, 8), // "mChanged"
 QT_MOC_LITERAL(4, 28, 11), // "timeChanged"
 QT_MOC_LITERAL(5, 40, 11), // "dateChanged"
-QT_MOC_LITERAL(6, 52, 1), // "d"
-QT_MOC_LITERAL(7, 54, 1), // "m"
-QT_MOC_LITERAL(8, 56, 4), // "time"
-QT_MOC_LITERAL(9, 61, 4) // "date"
+QT_MOC_LITERAL(6, 52, 15), // "dateTimeChanged"
+QT_MOC_LITERAL(7, 68, 1), // "d"
+QT_MOC_LITERAL(8, 70, 1), // "m"
+QT_MOC_LITERAL(9, 72, 4), // "time"
+QT_MOC_LITERAL(10, 77, 4), // "date"
+QT_MOC_LITERAL(11, 82, 8) // "dateTime"
 
     },
     "DateTime\0dChanged\0\0mChanged\0timeChanged\0"
-    "dateChanged\0d\0m\0time\0date"
+    "dateChanged\0dateTimeChanged\0d\0m\0time\0"
+    "date\0dateTime"
 };
 #undef QT_MOC_LITERAL
 
@@ -55,36 +58,40 @@ static const uint qt_meta_data_DateTime[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
-       4,   38, // properties
+       5,   14, // methods
+       5,   44, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       4,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x06 /* Public */,
-       3,    0,   35,    2, 0x06 /* Public */,
-       4,    0,   36,    2, 0x06 /* Public */,
-       5,    0,   37,    2, 0x06 /* Public */,
+       1,    0,   39,    2, 0x06 /* Public */,
+       3,    0,   40,    2, 0x06 /* Public */,
+       4,    0,   41,    2, 0x06 /* Public */,
+       5,    0,   42,    2, 0x06 /* Public */,
+       6,    0,   43,    2, 0x06 /* Public */,
 
  // signals: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void,
 
  // properties: name, type, flags
-       6, QMetaType::QString, 0x00495903,
        7, QMetaType::QString, 0x00495903,
        8, QMetaType::QString, 0x00495903,
        9, QMetaType::QString, 0x00495903,
+      10, QMetaType::QString, 0x00495903,
+      11, QMetaType::QString, 0x00495903,
 
  // properties: notify_signal_id
        0,
        1,
        2,
        3,
+       4,
 
        0        // eod
 };
@@ -99,6 +106,7 @@ void DateTime::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 1: _t->mChanged(); break;
         case 2: _t->timeChanged(); break;
         case 3: _t->dateChanged(); break;
+        case 4: _t->dateTimeChanged(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -131,6 +139,13 @@ void DateTime::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
                 return;
             }
         }
+        {
+            using _t = void (DateTime::*)();
+            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&DateTime::dateTimeChanged)) {
+                *result = 4;
+                return;
+            }
+        }
     }
 #ifndef QT_NO_PROPERTIES
     else if (_c == QMetaObject::ReadProperty) {
@@ -142,6 +157,7 @@ void DateTime::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 1: *reinterpret_cast< QString*>(_v) = _t->m(); break;
         case 2: *reinterpret_cast< QString*>(_v) = _t->time(); break;
         case 3: *reinterpret_cast< QString*>(_v) = _t->date(); break;
+        case 4: *reinterpret_cast< QString*>(_v) = _t->dateTime(); break;
         default: break;
         }
     } else if (_c == QMetaObject::WriteProperty) {
@@ -153,6 +169,7 @@ void DateTime::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 1: _t->setM(*reinterpret_cast< QString*>(_v)); break;
         case 2: _t->setTime(*reinterpret_cast< QString*>(_v)); break;
         case 3: _t->setDate(*reinterpret_cast< QString*>(_v)); break;
+        case 4: _t->setDateTime(*reinterpret_cast< QString*>(_v)); break;
         default: break;
         }
     } else if (_c == QMetaObject::ResetProperty) {
@@ -190,29 +207,29 @@ int DateTime::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 5;
     }
 #ifndef QT_NO_PROPERTIES
     else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
             || _c == QMetaObject::ResetProperty || _c == QMetaObject::RegisterPropertyMetaType) {
         qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::QueryPropertyDesignable) {
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::QueryPropertyScriptable) {
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::QueryPropertyStored) {
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::QueryPropertyEditable) {
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::QueryPropertyUser) {
-        _id -= 4;
+        _id -= 5;
     }
 #endif // QT_NO_PROPERTIES
     return _id;
@@ -240,6 +257,12 @@ void DateTime::timeChanged()
 void DateTime::dateChanged()
 {
     QMetaObject::activate(this, &staticMetaObject, 3, nullptr);
+}
+
+// SIGNAL 4
+void DateTime::dateTimeChanged()
+{
+    QMetaObject::activate(this, &staticMetaObject, 4, nullptr);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

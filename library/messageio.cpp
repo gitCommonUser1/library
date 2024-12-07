@@ -126,20 +126,50 @@ void MessageIO::newMessage(char *data, int len)
     }else if(messageType == "getBooks"){
         if(paramerType == "res"){
             MenuItem item;
-            item.setId(list[0].toInt());
-            item.setName(list[1].toString());
-            item.setAuthor(list[2].toString());
-            item.setBookId(list[3].toString());
-            item.setPages(list[4].toInt());
-            item.setType(list[5].toString());
-            item.setLanguage(list[6].toString());
-            item.setPrice(list[7].toString());
-            item.setStatus(list[8].toInt());
+            item.setName(list[0].toString());
+            item.setAuthor(list[1].toString());
+            item.setBookId(list[2].toString());
+            item.setPages(list[3].toInt());
+            item.setType(list[4].toString());
+            item.setLanguage(list[5].toString());
+            item.setPrice(list[6].toDouble());
             booksModel->appendItem(item);
         }
     }else if(messageType == "removeBook"){
         if(paramerType == "res"){
             booksModel->removeOneByBookId(list[0].toString());
         }
+    }else if(messageType == "addBook"){
+        if(paramerType == "res"){
+            MenuItem item;
+            item.setName(list[0].toString());
+            item.setBookId(list[1].toString());
+            item.setAuthor(list[1].toString());
+            item.setPages(list[3].toInt());
+            item.setPrice(list[4].toDouble());
+            item.setType(list[5].toString());
+            item.setLanguage(list[6].toString());
+            booksModel->appendItem(item);
+        }
+    }else if(messageType == "getBorrow"){
+        if(paramerType == "res"){
+            // MenuItem item;
+            // item.setName(list[0].toString());
+            // item.setAuthor(list[1].toString());
+            // item.setBookId(list[2].toString());
+            // item.setPages(list[3].toInt());
+            // item.setType(list[4].toString());
+            // item.setLanguage(list[5].toString());
+            // item.setPrice(list[6].toDouble());
+            // booksModel->appendItem(item);
+        }
+    }else if(messageType == "borrowBook"){
+        emit client->borrowBookOk();
+    }else if(messageType == "borrowBookError"){
+        emit client->borrowBookError();
+    }else if(messageType == "returnBook"){
+        emit client->returnBookOk();
+    }else if(messageType == "returnBookError"){
+        emit client->returnBookError();
     }
 }

@@ -144,6 +144,39 @@ void MessageIO::newMessage(char *data, int len)
                 sendPack(createMessage(messageType,"res",{list[0].toString()}));
             }
         }
+    }else if(messageType == "addBook"){
+        if(list.size() > 6){
+            if(sql->addBook(list[0].toString(),list[1].toString(),list[2].toString(),list[3].toInt(),list[4].toDouble(),list[5].toString(),list[6].toString())){
+                sendPack(createMessage(messageType,"res",{list[0].toString(),list[1].toString(),list[2].toString(),list[3].toInt(),list[4].toDouble(),list[5].toString(),list[6].toString()}));
+            }
+        }
+    }else if(messageType == "getBorrow"){
+        if(paramerType == "get"){
+            auto vList = sql->getAllBorrow();
+            for(auto strList:vList){
+                QVariantList data;
+                for(auto str:strList.toStringList()){
+                    data << str;
+                }
+                sendPack(createMessage(messageType,"res",data));
+            }
+        }
+    }else if(messageType == "borrowBook"){
+        if(list.size() > 2){
+            if(sql->borrowBook(list[0].toString(),list[1].toString(),list[2].toString())){
+                sendPack(createMessage(messageType,"res",{list[0].toString(),list[1].toString(),list[2].toString()}));
+            }else{
+                sendPack(createMessage("borrowBookError","res",{}));
+            }
+        }
+    }else if(messageType == "returnBook"){
+        if(list.size() > 1){
+            if(sql->returnBook(list[0].toString(),list[1].toString())){
+                sendPack(createMessage(messageType,"res",{list[0].toString(),list[1].toString()}));
+            }else{
+                sendPack(createMessage("returnBookError","res",{}));
+            }
+        }
     }
 }
 
