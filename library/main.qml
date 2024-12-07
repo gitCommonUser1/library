@@ -1120,6 +1120,55 @@ Window {
             //searchs
             Rectangle{
                 visible: mainPageIndex == 3
+                id:stackViewSearchs
+                anchors.fill:parent
+                color:"transparent"
+
+                Rectangle{
+                    id:searchsRect
+                    anchors.fill:parent
+                    radius: 35
+                    color:"#E5E5E5"
+                    opacity: 0
+                }
+
+                Rectangle{
+                    anchors.fill:searchsRect
+                    color:"transparent"
+
+                    TextField{
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.top:parent.top
+                        anchors.topMargin: 20
+                        width:820
+                        height:60
+                        background:Rectangle{
+                            color:"white"
+                            radius: 20
+                        }
+                        font.pixelSize: 28
+                        placeholderText:"Enter a book_id,author or type..."
+                        topPadding: 2
+                        bottomPadding: 2
+                        rightPadding: 50
+                        Image{
+                            width:30
+                            height:30
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.right:parent.right
+                            anchors.rightMargin: 15
+                            source:"file:./images/search.png"
+                        }
+                        MouseArea{
+                            height:parent.height
+                            width:50
+                            anchors.right:parent.right
+                            onClicked: {
+
+                            }
+                        }
+                    }
+                }
             }
 
             //stats
