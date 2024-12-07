@@ -1135,7 +1135,6 @@ Window {
                 Rectangle{
                     anchors.fill:searchsRect
                     color:"transparent"
-
                     TextField{
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.top:parent.top
@@ -1174,6 +1173,101 @@ Window {
             //stats
             Rectangle{
                 visible: mainPageIndex == 4
+                id:stackViewStats
+                anchors.fill:parent
+                color:"transparent"
+
+                Rectangle{
+                    id:statsRect
+                    anchors.fill:parent
+                    radius: 35
+                    color:"#E5E5E5"
+                    opacity: 0.3
+                }
+
+                Rectangle{
+                    anchors.fill:statsRect
+                    color:"transparent"
+                    //red blue yellow green
+                    Rectangle{
+                        id:round
+                        width:450
+                        height:450
+                        radius: width / 2
+                        anchors.centerIn: parent
+                    }
+                    LibRadioButton{
+                        anchors.left: round.right
+                        anchors.leftMargin: 140
+                        y:300
+                        lText:"By Book Id"
+                        checked: true
+                    }
+                    LibRadioButton{
+                        anchors.left: round.right
+                        anchors.leftMargin: 140
+                        y:350
+                        lText:"By User Id"
+                    }
+
+                    Column{
+                        y:220
+                        x:100
+                        spacing: 50
+                        Rectangle{
+                            width:40
+                            height:20
+                            color:"red"
+                            Text{
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left:parent.right
+                                anchors.leftMargin: 10
+                                text:"- xxx"
+                                color:"white"
+                                font.pixelSize: 22
+                            }
+                        }
+                        Rectangle{
+                            width:40
+                            height:20
+                            color:"blue"
+                            Text{
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left:parent.right
+                                anchors.leftMargin: 10
+                                text:"- xxx"
+                                color:"white"
+                                font.pixelSize: 22
+                            }
+                        }
+                        Rectangle{
+                            width:40
+                            height:20
+                            color:"yellow"
+                            Text{
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left:parent.right
+                                anchors.leftMargin: 10
+                                text:"- xxx"
+                                color:"white"
+                                font.pixelSize: 22
+                            }
+                        }
+                        Rectangle{
+                            width:40
+                            height:20
+                            color:"green"
+                            Text{
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left:parent.right
+                                anchors.leftMargin: 10
+                                text:"- xxx"
+                                color:"white"
+                                font.pixelSize: 22
+                            }
+                        }
+                    }
+                }
             }
         }
 

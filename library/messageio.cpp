@@ -159,8 +159,12 @@ void MessageIO::newMessage(char *data, int len)
             item.setUserId(list[0].toString());
             item.setBookId(list[1].toString());
             item.setBorrowStatus(list[2].toString());
-            item.setBorrowDate(list[3].toString());
-            item.setReturnDate(list[4].toString());
+            QDateTime dateTime = QDateTime::fromString(list[3].toString(), Qt::ISODate);
+            QString formattedDate = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+            item.setBorrowDate(formattedDate);
+            dateTime = QDateTime::fromString(list[4].toString(), Qt::ISODate);
+            formattedDate = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+            item.setReturnDate(formattedDate);
             borrowModel->appendItem(item);
         }
     }else if(messageType == "borrowBook"){
@@ -175,7 +179,9 @@ void MessageIO::newMessage(char *data, int len)
     }else if(messageType == "borrowBookError"){
         emit client->borrowBookError();
     }else if(messageType == "returnBook"){
-        borrowModel->returnBookByBookId(list[0].toString(),list[1].toString());
+        QDateTime dateTime = QDateTime::fromString(list[1].toString(), Qt::ISODate);
+        QString formattedDate = dateTime.toString("yyyy-MM-dd HH:mm:ss");
+        borrowModel->returnBookByBookId(list[0].toString(),formattedDate);
         emit client->returnBookOk();
     }else if(messageType == "returnBookError"){
         emit client->returnBookError();
