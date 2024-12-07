@@ -774,9 +774,17 @@ Window {
                     anchors.horizontalCenter: gridView.horizontalCenter
                     anchors.top:gridView.bottom
                     // anchors.topMargin: -20
-                    source:"file:./images/add_book.png"
+                    source:enter?"file:./images/add_book_active.png":"file:./images/add_book.png"
+                    property var enter: false
                     MouseArea{
                         anchors.fill:parent
+                        hoverEnabled: true
+                        onEntered: {
+                            parent.enter = true
+                        }
+                        onExited: {
+                            parent.enter = false
+                        }
                         onClicked: {
                             stackViewBooks.addBookFlag = true
                         }
