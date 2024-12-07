@@ -136,6 +136,9 @@ Window {
                 // onFocusChanged: {
                 //     focus = true
                 // }
+                topPadding: 2
+                bottomPadding: 2
+                leftPadding: 16
                 placeholderText:"enter User ID"
                 background:Rectangle{
                     color:"#D9D9D9"
@@ -143,7 +146,7 @@ Window {
                     border.width: 1
                     border.color:"black"
                 }
-                font.pixelSize: 22
+                font.pixelSize: 32
                 color:"black"
                 validator: RegExpValidator {
                     regExp: /^[a-zA-Z0-9_]*$/
@@ -169,6 +172,9 @@ Window {
                 x:591
                 anchors.top:password.bottom
                 anchors.topMargin: 10
+                topPadding: 2
+                bottomPadding: 2
+                leftPadding: 16
                 placeholderText:"enter Password"
                 background:Rectangle{
                     color:"#D9D9D9"
@@ -176,7 +182,7 @@ Window {
                     border.width: 1
                     border.color:"black"
                 }
-                font.pixelSize: 22
+                font.pixelSize: 32
                 color:"black"
                 validator: RegExpValidator {
                     regExp: /^[a-zA-Z0-9_]*$/
