@@ -5,10 +5,12 @@
 #include "datetime.h"
 #include "booksmodel.h"
 #include "borrowmodel.h"
+#include "state.h"
 
 Client *client = nullptr;
 BooksModel * booksModel = nullptr;
 BorrowModel *borrowModel = nullptr;
+State *state = nullptr;
 
 int main(int argc, char *argv[])
 {
@@ -29,6 +31,9 @@ int main(int argc, char *argv[])
 
     borrowModel = new BorrowModel;
     engine.rootContext()->setContextProperty("borrowModel",borrowModel);
+
+    state = new State;
+    engine.rootContext()->setContextProperty("state",state);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

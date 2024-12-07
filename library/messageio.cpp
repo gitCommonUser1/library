@@ -5,10 +5,12 @@
 #include "client.h"
 #include "booksmodel.h"
 #include "borrowmodel.h"
+#include "state.h"
 
 extern Client *client;
 extern BooksModel *booksModel;
 extern BorrowModel *borrowModel;
+extern State *state;
 
 
 MessageIO::MessageIO(QObject *parent) : QObject(parent)
@@ -166,6 +168,8 @@ void MessageIO::newMessage(char *data, int len)
             formattedDate = dateTime.toString("yyyy-MM-dd HH:mm:ss");
             item.setReturnDate(formattedDate);
             borrowModel->appendItem(item);
+            state->appendUserId(list[0].toString());
+            state->appendBookId(list[1].toString());
         }
     }else if(messageType == "borrowBook"){
         BorrowItem item;
@@ -175,6 +179,8 @@ void MessageIO::newMessage(char *data, int len)
         // item.setReturnDate("");
         item.setBorrowStatus("borrowed");
         borrowModel->appendItem(item);
+        state->appendUserId(list[0].toString());
+        state->appendBookId(list[1].toString());
         emit client->borrowBookOk();
     }else if(messageType == "borrowBookError"){
         emit client->borrowBookError();

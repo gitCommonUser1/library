@@ -19,7 +19,8 @@ SOURCES += \
         client.cpp \
         datetime.cpp \
         main.cpp \
-        messageio.cpp
+        messageio.cpp \
+        state.cpp
 
 RESOURCES += qml.qrc
 
@@ -43,4 +44,5 @@ HEADERS += \
     crc16.h \
     datetime.h \
     messagecmd.h \
-    messageio.h
+    messageio.h \
+    state.h
