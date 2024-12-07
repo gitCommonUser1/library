@@ -993,6 +993,128 @@ Window {
             //history
             Rectangle{
                 visible: mainPageIndex == 2
+                id:stackViewHisTory
+                anchors.fill:parent
+                color:"transparent"
+
+                Rectangle{
+                    id:historyRect
+                    anchors.fill:parent
+                    radius: 35
+                    color:"#E5E5E5"
+                    opacity: 0.3
+                }
+
+                Rectangle{
+                    anchors.fill:historyRect
+                    color:"transparent"
+                    Row{
+                        id:historyTop
+                        x:50
+                        y:50
+                        spacing: 140
+                        Text{
+                            id:hostoryUserId
+                            color:"white"
+                            font.pixelSize: 26
+                            text:"User Id"
+                        }
+                        Text{
+                            id:hostoryBookId
+                            color:"white"
+                            font.pixelSize: 26
+                            text:"Book Id"
+                        }
+                        Text{
+                            id:hostoryBorrowDate
+                            color:"white"
+                            font.pixelSize: 26
+                            text:"Borrow Date"
+                        }
+                        Text{
+                            id:hostoryReturnDate
+                            color:"white"
+                            font.pixelSize: 26
+                            text:"Return Date"
+                        }
+                        Text{
+                            id:hostoryBorrowStatus
+                            color:"white"
+                            font.pixelSize: 26
+                            text:"Borrow Status"
+                        }
+                    }
+
+                    ListView{
+                        x:50
+                        anchors.top:historyTop.bottom
+                        anchors.topMargin: 50
+                        width:parent.width - 50*2
+                        height:parent.height - 50 * 2 - 50 - 26
+                        clip:true
+                        spacing: 30
+                        model:borrowModel
+                        delegate: historyListDelegate
+                    }
+                    Component{
+                        id:historyListDelegate
+                        Rectangle{
+                            width:parent.width
+                            height:50
+                            color:"transparent"
+                            Rectangle{
+                                width:parent.width
+                                height:1
+                                color:"white"
+                                anchors.top:parent.bottom
+                            }
+                            Text {
+                                x:hostoryUserId.x
+                                font.pixelSize: 24
+                                color:"black"
+                                text:modelUserId
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Text {
+                                x:hostoryBookId.x
+                                font.pixelSize: 24
+                                color:"black"
+                                text:modelBookId
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Text {
+                                x:hostoryBorrowDate.x
+                                font.pixelSize: 24
+                                color:"black"
+                                text:modelBorrowDate
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Text {
+                                x:hostoryReturnDate.x
+                                font.pixelSize: 24
+                                color:"black"
+                                text:modelReturnDate
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                            Text {
+                                x:hostoryBorrowStatus.x
+                                font.pixelSize: 24
+                                text:modelBorrowStatus
+                                color:{
+                                    if(modelBorrowStatus == "borrowed"){
+                                        "red"
+                                    }else if(modelBorrowStatus == "returned"){
+                                        "green"
+                                    }else{
+                                        "black"
+                                    }
+                                }
+
+                                anchors.verticalCenter: parent.verticalCenter
+                            }
+                        }
+                    }
+                }
             }
 
             //searchs

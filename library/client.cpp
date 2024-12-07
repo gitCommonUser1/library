@@ -65,6 +65,11 @@ void Client::addBook(QString name, QString bookid, QString auname, int pages, do
     write("addBook","set",{name,bookid,auname,pages,price,type,language});
 }
 
+void Client::getBorrow()
+{
+    write("getBorrow","get",{});
+}
+
 void Client::sendImage(QString fileName)
 {
     static QTimer *timer = nullptr;

@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         booksmodel.cpp \
+        borrowmodel.cpp \
         client.cpp \
         datetime.cpp \
         main.cpp \
@@ -37,6 +38,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     booksmodel.h \
+    borrowmodel.h \
     client.h \
     crc16.h \
     datetime.h \

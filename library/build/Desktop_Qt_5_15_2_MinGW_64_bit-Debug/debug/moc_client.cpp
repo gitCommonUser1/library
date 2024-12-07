@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Client_t {
-    QByteArrayData data[36];
-    char stringdata0[342];
+    QByteArrayData data[37];
+    char stringdata0[352];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -37,7 +37,7 @@ QT_MOC_LITERAL(1, 7, 12), // "signInSignal"
 QT_MOC_LITERAL(2, 20, 0), // ""
 QT_MOC_LITERAL(3, 21, 6), // "result"
 QT_MOC_LITERAL(4, 28, 14), // "newBookMessage"
-QT_MOC_LITERAL(5, 43, 8), // "MenuItem"
+QT_MOC_LITERAL(5, 43, 8), // "BookItem"
 QT_MOC_LITERAL(6, 52, 4), // "item"
 QT_MOC_LITERAL(7, 57, 12), // "borrowBookOk"
 QT_MOC_LITERAL(8, 70, 15), // "borrowBookError"
@@ -62,24 +62,25 @@ QT_MOC_LITERAL(26, 263, 5), // "pages"
 QT_MOC_LITERAL(27, 269, 5), // "price"
 QT_MOC_LITERAL(28, 275, 4), // "type"
 QT_MOC_LITERAL(29, 280, 8), // "language"
-QT_MOC_LITERAL(30, 289, 9), // "sendImage"
-QT_MOC_LITERAL(31, 299, 8), // "fileName"
-QT_MOC_LITERAL(32, 308, 10), // "borrowBook"
-QT_MOC_LITERAL(33, 319, 6), // "userId"
-QT_MOC_LITERAL(34, 326, 4), // "date"
-QT_MOC_LITERAL(35, 331, 10) // "returnBook"
+QT_MOC_LITERAL(30, 289, 9), // "getBorrow"
+QT_MOC_LITERAL(31, 299, 10), // "borrowBook"
+QT_MOC_LITERAL(32, 310, 6), // "userId"
+QT_MOC_LITERAL(33, 317, 4), // "date"
+QT_MOC_LITERAL(34, 322, 10), // "returnBook"
+QT_MOC_LITERAL(35, 333, 9), // "sendImage"
+QT_MOC_LITERAL(36, 343, 8) // "fileName"
 
     },
     "Client\0signInSignal\0\0result\0newBookMessage\0"
-    "MenuItem\0item\0borrowBookOk\0borrowBookError\0"
+    "BookItem\0item\0borrowBookOk\0borrowBookError\0"
     "returnBookOk\0returnBookError\0"
     "connectedChanged\0connected\0setConnected\0"
     "connectByIpAddress\0ipAddress\0signIn\0"
     "username\0password\0getBooks\0removeBook\0"
     "bookId\0addBook\0name\0bookid\0auname\0"
-    "pages\0price\0type\0language\0sendImage\0"
-    "fileName\0borrowBook\0userId\0date\0"
-    "returnBook"
+    "pages\0price\0type\0language\0getBorrow\0"
+    "borrowBook\0userId\0date\0returnBook\0"
+    "sendImage\0fileName"
 };
 #undef QT_MOC_LITERAL
 
@@ -89,34 +90,35 @@ static const uint qt_meta_data_Client[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      16,   14, // methods
-       1,  152, // properties
+      17,   14, // methods
+       1,  158, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        7,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   94,    2, 0x06 /* Public */,
-       4,    1,   97,    2, 0x06 /* Public */,
-       7,    0,  100,    2, 0x06 /* Public */,
-       8,    0,  101,    2, 0x06 /* Public */,
-       9,    0,  102,    2, 0x06 /* Public */,
-      10,    0,  103,    2, 0x06 /* Public */,
-      11,    1,  104,    2, 0x06 /* Public */,
+       1,    1,   99,    2, 0x06 /* Public */,
+       4,    1,  102,    2, 0x06 /* Public */,
+       7,    0,  105,    2, 0x06 /* Public */,
+       8,    0,  106,    2, 0x06 /* Public */,
+       9,    0,  107,    2, 0x06 /* Public */,
+      10,    0,  108,    2, 0x06 /* Public */,
+      11,    1,  109,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-      13,    1,  107,    2, 0x0a /* Public */,
+      13,    1,  112,    2, 0x0a /* Public */,
 
  // methods: name, argc, parameters, tag, flags
-      14,    1,  110,    2, 0x02 /* Public */,
-      16,    2,  113,    2, 0x02 /* Public */,
-      19,    0,  118,    2, 0x02 /* Public */,
-      20,    1,  119,    2, 0x02 /* Public */,
-      22,    7,  122,    2, 0x02 /* Public */,
-      30,    1,  137,    2, 0x02 /* Public */,
-      32,    3,  140,    2, 0x02 /* Public */,
-      35,    2,  147,    2, 0x02 /* Public */,
+      14,    1,  115,    2, 0x02 /* Public */,
+      16,    2,  118,    2, 0x02 /* Public */,
+      19,    0,  123,    2, 0x02 /* Public */,
+      20,    1,  124,    2, 0x02 /* Public */,
+      22,    7,  127,    2, 0x02 /* Public */,
+      30,    0,  142,    2, 0x02 /* Public */,
+      31,    3,  143,    2, 0x02 /* Public */,
+      34,    2,  150,    2, 0x02 /* Public */,
+      35,    1,  155,    2, 0x02 /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Bool,    3,
@@ -136,9 +138,10 @@ static const uint qt_meta_data_Client[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,   21,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString, QMetaType::Int, QMetaType::Double, QMetaType::QString, QMetaType::QString,   23,   24,   25,   26,   27,   28,   29,
-    QMetaType::Void, QMetaType::QString,   31,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString,   33,   21,   34,
-    QMetaType::Void, QMetaType::QString, QMetaType::QString,   21,   34,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString,   32,   21,   33,
+    QMetaType::Void, QMetaType::QString, QMetaType::QString,   21,   33,
+    QMetaType::Void, QMetaType::QString,   36,
 
  // properties: name, type, flags
       12, QMetaType::Bool, 0x00495103,
@@ -156,7 +159,7 @@ void Client::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->signInSignal((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 1: _t->newBookMessage((*reinterpret_cast< const MenuItem(*)>(_a[1]))); break;
+        case 1: _t->newBookMessage((*reinterpret_cast< const BookItem(*)>(_a[1]))); break;
         case 2: _t->borrowBookOk(); break;
         case 3: _t->borrowBookError(); break;
         case 4: _t->returnBookOk(); break;
@@ -169,9 +172,10 @@ void Client::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 10: _t->getBooks(); break;
         case 11: _t->removeBook((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 12: _t->addBook((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3])),(*reinterpret_cast< int(*)>(_a[4])),(*reinterpret_cast< double(*)>(_a[5])),(*reinterpret_cast< QString(*)>(_a[6])),(*reinterpret_cast< QString(*)>(_a[7]))); break;
-        case 13: _t->sendImage((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 13: _t->getBorrow(); break;
         case 14: _t->borrowBook((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])),(*reinterpret_cast< QString(*)>(_a[3]))); break;
         case 15: _t->returnBook((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2]))); break;
+        case 16: _t->sendImage((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -181,7 +185,7 @@ void Client::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<int*>(_a[0]) = -1; break;
             case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< MenuItem >(); break;
+                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< BookItem >(); break;
             }
             break;
         }
@@ -195,7 +199,7 @@ void Client::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
             }
         }
         {
-            using _t = void (Client::*)(const MenuItem & );
+            using _t = void (Client::*)(const BookItem & );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Client::newBookMessage)) {
                 *result = 1;
                 return;
@@ -288,13 +292,13 @@ int Client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 16)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 16;
+        _id -= 17;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 16)
+        if (_id < 17)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 16;
+        _id -= 17;
     }
 #ifndef QT_NO_PROPERTIES
     else if (_c == QMetaObject::ReadProperty || _c == QMetaObject::WriteProperty
@@ -324,7 +328,7 @@ void Client::signInSignal(bool _t1)
 }
 
 // SIGNAL 1
-void Client::newBookMessage(const MenuItem & _t1)
+void Client::newBookMessage(const BookItem & _t1)
 {
     void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t1))) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

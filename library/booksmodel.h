@@ -5,7 +5,7 @@
 #include <QObject>
 
 
-class MenuItem{
+class BookItem{
     Q_GADGET
     Q_PROPERTY(QString name READ name WRITE setName)
     Q_PROPERTY(QString author READ author WRITE setAuthor)
@@ -15,13 +15,13 @@ class MenuItem{
     Q_PROPERTY(QString type READ type WRITE setType)
     Q_PROPERTY(QString language READ language WRITE setLanguage)
 public:
-    MenuItem(){
+    BookItem(){
 
     }
-    MenuItem(const MenuItem &) = default;
-    MenuItem(MenuItem &&) = default;
-    MenuItem &operator=(const MenuItem &) = default;
-    MenuItem &operator=(MenuItem &&) = default;
+    BookItem(const BookItem &) = default;
+    BookItem(BookItem &&) = default;
+    BookItem &operator=(const BookItem &) = default;
+    BookItem &operator=(BookItem &&) = default;
 
     QString author() const{
         return m_author;
@@ -83,7 +83,7 @@ private:
     QString m_language;
 
 };
-Q_DECLARE_METATYPE(MenuItem)
+Q_DECLARE_METATYPE(BookItem)
 
 class BooksModel : public QAbstractListModel
 {
@@ -101,19 +101,18 @@ public:
     int rowCount(const QModelIndex & parent = QModelIndex())const;
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
 
-    void init(QList<MenuItem> items);
     void removeOneByBookId(QString bookId);
 
     //item操作
-    void appendItem(const MenuItem& item);
-    void insertItem(const MenuItem& item,int index);
+    void appendItem(const BookItem& item);
+    void insertItem(const BookItem& item,int index);
     void removeItem(int index);
-    void changeItem(const MenuItem& item,int index);
+    void changeItem(const BookItem& item,int index);
 
 protected:
     QHash<int, QByteArray> roleNames() const;
 private:
-    QList<MenuItem> m_items;
+    QList<BookItem> m_items;
 
 signals:
 

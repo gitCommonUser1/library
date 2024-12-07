@@ -21,18 +21,18 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_MenuItem_t {
+struct qt_meta_stringdata_BookItem_t {
     QByteArrayData data[8];
     char stringdata0[54];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_MenuItem_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_BookItem_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_MenuItem_t qt_meta_stringdata_MenuItem = {
+static const qt_meta_stringdata_BookItem_t qt_meta_stringdata_BookItem = {
     {
-QT_MOC_LITERAL(0, 0, 8), // "MenuItem"
+QT_MOC_LITERAL(0, 0, 8), // "BookItem"
 QT_MOC_LITERAL(1, 9, 4), // "name"
 QT_MOC_LITERAL(2, 14, 6), // "author"
 QT_MOC_LITERAL(3, 21, 6), // "bookId"
@@ -42,12 +42,12 @@ QT_MOC_LITERAL(6, 40, 4), // "type"
 QT_MOC_LITERAL(7, 45, 8) // "language"
 
     },
-    "MenuItem\0name\0author\0bookId\0pages\0"
+    "BookItem\0name\0author\0bookId\0pages\0"
     "price\0type\0language"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_MenuItem[] = {
+static const uint qt_meta_data_BookItem[] = {
 
  // content:
        8,       // revision
@@ -72,12 +72,12 @@ static const uint qt_meta_data_MenuItem[] = {
        0        // eod
 };
 
-void MenuItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void BookItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
 
 #ifndef QT_NO_PROPERTIES
     if (_c == QMetaObject::ReadProperty) {
-        auto *_t = reinterpret_cast<MenuItem *>(_o);
+        auto *_t = reinterpret_cast<BookItem *>(_o);
         Q_UNUSED(_t)
         void *_v = _a[0];
         switch (_id) {
@@ -91,7 +91,7 @@ void MenuItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         default: break;
         }
     } else if (_c == QMetaObject::WriteProperty) {
-        auto *_t = reinterpret_cast<MenuItem *>(_o);
+        auto *_t = reinterpret_cast<BookItem *>(_o);
         Q_UNUSED(_t)
         void *_v = _a[0];
         switch (_id) {
@@ -113,10 +113,10 @@ void MenuItem::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject MenuItem::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject BookItem::staticMetaObject = { {
     nullptr,
-    qt_meta_stringdata_MenuItem.data,
-    qt_meta_data_MenuItem,
+    qt_meta_stringdata_BookItem.data,
+    qt_meta_data_BookItem,
     qt_static_metacall,
     nullptr,
     nullptr

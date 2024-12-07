@@ -4,9 +4,11 @@
 #include <QTimer>
 #include "client.h"
 #include "booksmodel.h"
+#include "borrowmodel.h"
 
 extern Client *client;
 extern BooksModel *booksModel;
+extern BorrowModel *borrowModel;
 
 
 MessageIO::MessageIO(QObject *parent) : QObject(parent)
@@ -125,7 +127,7 @@ void MessageIO::newMessage(char *data, int len)
         }
     }else if(messageType == "getBooks"){
         if(paramerType == "res"){
-            MenuItem item;
+            BookItem item;
             item.setName(list[0].toString());
             item.setAuthor(list[1].toString());
             item.setBookId(list[2].toString());
@@ -141,7 +143,7 @@ void MessageIO::newMessage(char *data, int len)
         }
     }else if(messageType == "addBook"){
         if(paramerType == "res"){
-            MenuItem item;
+            BookItem item;
             item.setName(list[0].toString());
             item.setBookId(list[1].toString());
             item.setAuthor(list[1].toString());
@@ -153,21 +155,27 @@ void MessageIO::newMessage(char *data, int len)
         }
     }else if(messageType == "getBorrow"){
         if(paramerType == "res"){
-            // MenuItem item;
-            // item.setName(list[0].toString());
-            // item.setAuthor(list[1].toString());
-            // item.setBookId(list[2].toString());
-            // item.setPages(list[3].toInt());
-            // item.setType(list[4].toString());
-            // item.setLanguage(list[5].toString());
-            // item.setPrice(list[6].toDouble());
-            // booksModel->appendItem(item);
+            BorrowItem item;
+            item.setUserId(list[0].toString());
+            item.setBookId(list[1].toString());
+            item.setBorrowStatus(list[2].toString());
+            item.setBorrowDate(list[3].toString());
+            item.setReturnDate(list[4].toString());
+            borrowModel->appendItem(item);
         }
     }else if(messageType == "borrowBook"){
+        BorrowItem item;
+        item.setUserId(list[0].toString());
+        item.setBookId(list[1].toString());
+        item.setBorrowDate(list[2].toString());
+        // item.setReturnDate("");
+        item.setBorrowStatus("borrowed");
+        borrowModel->appendItem(item);
         emit client->borrowBookOk();
     }else if(messageType == "borrowBookError"){
         emit client->borrowBookError();
     }else if(messageType == "returnBook"){
+        borrowModel->returnBookByBookId(list[0].toString(),list[1].toString());
         emit client->returnBookOk();
     }else if(messageType == "returnBookError"){
         emit client->returnBookError();

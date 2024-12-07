@@ -15,7 +15,7 @@ QVariant BooksModel::data(const QModelIndex &index, int role) const
 {
     if (index.row() < 0 || index.row() >= m_items.count())
         return QVariant();
-    MenuItem item = m_items[index.row()];
+    BookItem item = m_items[index.row()];
     if (role == BooksModel::TypeName)
         return item.name();
     else if(role == BooksModel::TypeAuthor)
@@ -27,15 +27,6 @@ QVariant BooksModel::data(const QModelIndex &index, int role) const
     else if(role == BooksModel::TypePrice)
         return item.price();
     return QVariant();
-}
-
-void BooksModel::init(QList<MenuItem> items)
-{
-    m_items = items;
-    for(int i = 0;i < m_items.size();++i)
-    {
-        appendItem(m_items[i]);
-    }
 }
 
 void BooksModel::removeOneByBookId(QString bookId)
@@ -60,14 +51,14 @@ QHash<int, QByteArray> BooksModel::roleNames() const
     return roles;
 }
 
-void BooksModel::appendItem(const MenuItem &item)
+void BooksModel::appendItem(const BookItem &item)
 {
     beginInsertRows(QModelIndex(),rowCount(),rowCount());
     m_items << item;
     endInsertRows();
 }
 
-void BooksModel::insertItem(const MenuItem &item, int index)
+void BooksModel::insertItem(const BookItem &item, int index)
 {
     beginInsertRows(QModelIndex(),index,index);
     m_items.insert(index,item);
@@ -81,7 +72,7 @@ void BooksModel::removeItem(int index)
     endRemoveRows();
 }
 
-void BooksModel::changeItem(const MenuItem &item, int ind)
+void BooksModel::changeItem(const BookItem &item, int ind)
 {
     m_items[ind] = item;
     dataChanged(index(ind,0),index(ind,0));

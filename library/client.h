@@ -28,15 +28,18 @@ public:
     Q_INVOKABLE void getBooks();
     Q_INVOKABLE void removeBook(QString bookId);
     Q_INVOKABLE void addBook(QString name,QString bookid,QString auname,int pages,double price,QString type,QString language);
-    Q_INVOKABLE void sendImage(QString fileName);
+    Q_INVOKABLE void getBorrow();
     Q_INVOKABLE void borrowBook(QString userId,QString bookId,QString date);
     Q_INVOKABLE void returnBook(QString bookId,QString date);
+
+
+    Q_INVOKABLE void sendImage(QString fileName);
 private:
     void signInCall(bool &ok, bool &value,const QVariantList &pars);
 
 signals:
     void signInSignal(bool result);
-    void newBookMessage(const MenuItem&item);
+    void newBookMessage(const BookItem&item);
     void borrowBookOk();
     void borrowBookError();
     void returnBookOk();

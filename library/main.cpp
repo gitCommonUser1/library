@@ -4,9 +4,11 @@
 #include "client.h"
 #include "datetime.h"
 #include "booksmodel.h"
+#include "borrowmodel.h"
 
 Client *client = nullptr;
 BooksModel * booksModel = nullptr;
+BorrowModel *borrowModel = nullptr;
 
 int main(int argc, char *argv[])
 {
@@ -25,6 +27,9 @@ int main(int argc, char *argv[])
     booksModel = new BooksModel;
     engine.rootContext()->setContextProperty("booksModel",booksModel);
 
+    borrowModel = new BorrowModel;
+    engine.rootContext()->setContextProperty("borrowModel",borrowModel);
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
@@ -34,8 +39,9 @@ int main(int argc, char *argv[])
     engine.load(url);
 
 
-    //
+    //data init
     client->getBooks();
+    client->getBorrow();
 
     return app.exec();
 }

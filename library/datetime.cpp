@@ -14,7 +14,7 @@ DateTime::DateTime(QObject *parent)
         setTime(locale.toString(QDateTime::currentDateTime(),QString("h:mm AP")));
         setD(locale.toString(QDateTime::currentDateTime(),QString("d")));
         setM(m_date.left(3).toUpper());
-        setDateTime(locale.toString(QDateTime::currentDateTime(),QString("yyyy-MM-dd-HH:mm")));
+        setDateTime(locale.toString(QDateTime::currentDateTime(),QString("yyyy-MM-dd HH:mm")));
     });
     timer->start(1000);
 }
